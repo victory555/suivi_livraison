@@ -1,1 +1,1 @@
-web: gunicorn suivi_livraison.wsgi 
+web: gunicorn suivi_livraison.wsgi --log-file -
