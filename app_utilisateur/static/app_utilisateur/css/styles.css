@@ -1,0 +1,8 @@
+body{
+    background: linear-gradient(0deg, rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url("../images/pexels-vhsantosf-325703.jpg")  no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -noz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+}

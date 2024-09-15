@@ -1,0 +1,352 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link href="{% static 'Livraison/elements/css/nucleo-icons.css'%}" rel="stylesheet" />
+  <link href="{% static 'Livraison/elements/css/nucleo-svg.css'%}" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link id="pagestyle" href="{% static 'Livraison/elements/css/material-dashboard.css'%}" rel="stylesheet" />
+  <script src="{% static 'Livraison/js/jquery.min.js'%}"></script>
+  <script src="{% static 'Livraison/js/script.js'%}"></script>
+  <link rel="stylesheet" href="{% static 'Livraison/css/style.css'%}">
+  <link rel="stylesheet" href="{% static 'Livraison/css/all.min.css'%}">
+  <script src="{% static 'Livraison/js/all.min.js'%}"></script>
+  <script src="{% static 'Livraison/js/slim.min.js'%}"></script>
+  <script src="{% static 'Livraison/js/popper.min.js'%}"></script>
+  <link rel="stylesheet" href="{% static 'Livraison/css/bootstrap.min.css'%}">
+  <script src="{% static 'Livraison/js/bootstrap.min.js'%}"></script>
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+    <div class="sidenav-header">
+        <span class="ms-1 font-weight-bold text-white">Suivi Livraison.</span><i class="fas fa-paper-plane bg-white rounded-pill p-2 mx-3 " style="font-size: 20px; color: red; position: relative; top: 10px;"></i>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'perso_admin:dashboard' %}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <span class="fas fa-chart-line"></span>
+            </div>
+            <span class="nav-link-text ms-1">Tableau de bord</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'app_utilisateur:profil' %}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <span class="fas fa-user-circle"></span>
+            </div>
+            <span class="nav-link-text ms-1">Mon profil</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'perso_admin:menu'%}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <span class="fas fa-people-group"></span>
+            </div>
+            <span class="nav-link-text ms-1">Administrateurs</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'colis:menu'%}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <span class="fas fa-cube"></span>
+            </div>
+            <span class="nav-link-text ms-1">Colis</span>
+          </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'Livraison:menu' %}">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <span class="fas fa-truck-fast"></span>
+              </div>
+              <span class="nav-link-text ms-1">Livraisons</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'app_utilisateur:menu' %}">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <span class="fas fa-users"></span>
+              </div>
+              <span class="nav-link-text ms-1">Utilisateurs</span>
+            </a>
+          </li>
+        <div style="border-top: 1px solid white;"></div>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'perso_admin:logout' %}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <span class="fas fa-power-off"></span>
+            </div>
+            <span class="nav-link-text ms-1">Deconnexion</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>    
+  <main class="main-content border-radius-lg">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark font-weight-bolder" aria-current="page">Livraison</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Les Livraisons</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <input type="text" class="form-control" id="searchInput" placeholder="Recherche">
+            </div>
+          </div>
+          <ul class="navbar-nav justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" href="{% url 'app_utilisateur:profil'%}" data-toggle="tooltip" data-placement="bottom" title="Mon profil"> <span class="fas fa-user-circle"></span></a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" href="{% url 'perso_admin:logout'%}" data-toggle="tooltip" data-placement="bottom" title="Se deconnecter"> <span class="fas fa-power-off"></span></a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" href="" data-toggle="tooltip" data-placement="bottom" title="Imprimer" id="printTable"> <span class="fas fa-print"></span></a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" href="" data-toggle="tooltip" data-placement="bottom" title="Imprimer" id="exportExcel"> <span class="fas fa-file-excel"></span></a>
+            </li>
+            <!-- Add more navbar items here -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="container ">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="d-flex flex-column justify-content-center">
+                <h1 class="mb-0 text-sm"> Bienvenue {{ username}}</h1>
+                <p class="text-xs text-secondary mb-0">{{ email}}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+          </div>
+          <div class="col-12 mx-3">
+            <div  style="height: 16px;">
+              {% if messages %}
+              {% for message in messages %}
+                  <p class="text-danger" style="font-size: 13px; font-weight: bold;">{{ message }} <span class="fas fa-circle-exclamation"></span></p>
+                {% endfor %}
+            {% endif %}
+            </div>  
+            <div class="card mb-4">
+              <div class="card-header pb-0">
+                <h6>Liste des Livraison</h6>
+              </div>
+              <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0 table-striped table-bordered table-hover" id="myTable">
+                    <thead>
+                      <tr>
+                        <td class="text-sm"><span class="fas fa-list mx-3"></span>Nombre d'Livraison : <span class="bg-dark p-2 rounded-pill text-white text-b" style="font-weight:bold;">{{ nombre }}</span></td>
+                        <td class="text-sm" colspan="2">Ajouter une Livraison
+                          <a href="{%url 'Livraison:add_Livraison'%}" class="btn btn-primary btn-sm mx-3 rounded-pill" >
+                            <span class="fas fa-plus"></span>
+                          </a>
+                        </td>
+                      </tr>                        
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° & colis<a href="#" id="sortName"><span class="fas fa-sort mx-3" data-toggle="tooltip" data-placement="bottom" title="Trier les élements"></span></a></th>
+                    </th>
+
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proprétaire <a href="#" id="sortName"><span class="fas fa-sort mx-3" data-toggle="tooltip" data-placement="bottom" title="Trier les élements"></span></a></th>
+
+                      </th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> statut<a href="#" id="sortName"><span class="fas fa-sort mx-3" data-toggle="tooltip" data-placement="bottom" title="Trier les élements"></span></a></th>
+                    </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 action">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for Livraison in liste %}
+
+                        <tr class="affiche">
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <span class=" fas fa-truck-fast avatar-sm me-3">
+                              </span>
+
+                              <div>
+                              </div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">{{ Livraison.id }}</h6>
+                                <p class="text-xs text-secondary mb-0">{{ Livraison.colis.expediteur }}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <h6 class="mb-0 text-sm">{{ Livraison.proprietaire.username }}</h6>
+
+                          </td>
+                          <td class="align-middle">
+                        {% if Livraison.statut == "delivered" %}
+                        <h6 class="mb-0 text-sm">Livré</h6>                        
+                        {% elif  Livraison.statut == "in_transit" %}
+                        <h6 class="mb-0 text-sm">en transit</h6>  
+                        {% else %}      
+                        <h6 class="mb-0 text-sm">Rétardé</h6>                   
+                          {% endif %}
+                          </td>
+                          
+                          <td class="align-middle">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editAdminModal" data-id="{{ Livraison.id }}">
+                              <span class="fas fa-eye"></span>
+                            </button>
+                            <a href="/Livraison/editer/{{ Livraison.id }}" class="btn btn-warning btn-sm mx-3"  data-toggle="tooltip">Modifier
+                              <span class="fas fa-pencil-square" style="color: white;"></span>
+                            </a>
+
+                            <a type="button" class="btn btn-danger btn-sm" href="/Livraison/delete/{{ Livraison.id }}">
+                              <span class="fas fa-trash-can"></span> Supprimer
+                            </a>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                     
+                    </tbody>
+                  </table>
+                </div>
+                <div id="paginationE" class="mt-3 mx-3">
+                  <span class="px-3" id="pagination"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+  <!-- Edit Admin Modal -->
+  <div class="modal fade" id="editAdminModal" tabindex="-1" role="dialog" aria-labelledby="editAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editAdminModalLabel">Consulter un Livraison</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Form for viewing admin information -->
+          <form id="editAdminForm" method="POST">
+            <input type="hidden" id="editAdminId" name="adminId">
+            <div class="form-group text-center">
+              <span class="fas fa-truck-fast img-fluid rounded-pill" style="height: 100px;"></span>
+            </div>
+            <div class="form-group">
+              <label for="editAdminName" class="text-xs font-weight-bold mb-0">Livraison</label>
+              <input type="text" class="form-control readonly align-middle" id="editAdminName" name="adminName" readonly>
+            </div>
+            <div class="form-group">
+              <label for="editAdminExpediteur" class="text-xs font-weight-bold mb-0">Expéditeur</label>
+              <input type="text" class="form-control readonly" id="editAdminExpediteur" name="adminExpediteur" readonly>
+            </div>
+            <div class="form-group">
+              <label for="editAdminDestinateur" class="text-xs font-weight-bold mb-0">Destinataire</label>
+              <input type="text" class="form-control readonly" id="editAdminDestinateur" name="adminDestinateur" readonly>
+            </div>
+            <div class="form-group">
+              <label for="editAdminAdresse" class="text-xs font-weight-bold mb-0">Adresse</label>
+              <input type="text" class="form-control readonly" id="editAdminAdresse" name="adminAdresse" readonly>
+            </div>
+            <button type="button" class="btn btn-primary form-control p-2" data-dismiss="modal">Fermer <span class="fas fa-power-off"></span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</body>
+<script src="{% static 'Livraison/js/xlsx.full.min.js'%}"></script>
+<script>
+      document.getElementById('printTable').addEventListener('click', function() {
+        let printContents = document.getElementById('myTable').outerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload();
+    });
+
+    // Fonction pour exporter le tableau en fichier XLS
+    document.getElementById('exportExcel').addEventListener('click', function() {
+        let table = document.getElementById('myTable');
+        let workbook = XLSX.utils.table_to_book(table, {sheet: "Sheet JS"});
+        XLSX.writeFile(workbook, 'tableau_livraison.xlsx');
+    });
+  $(document).ready(function() {
+
+$(document).ready(function () {
+  $('#editAdminModal').on('show.bs.modal', function (event) {
+    let button = $(event.relatedTarget);
+    
+    let LivraisonId = button.data('id');
+
+    let row = button.closest('tr');
+
+    let numeroSuivi = row.find('h6').eq(0).text(); 
+    let expediteur = row.find('p').text(); 
+    let destinataire = row.find('td').eq(1).text(); 
+    let adresse = row.find('td').eq(2).text(); 
+
+    let modal = $(this);
+    modal.find('#editAdminId').val(LivraisonId);
+    modal.find('#editAdminName').val(numeroSuivi);
+    modal.find('#editAdminExpediteur').val(expediteur);
+    modal.find('#editAdminDestinateur').val(destinataire);
+    modal.find('#editAdminAdresse').val(adresse);
+  });
+});
+
+  // Search functionality
+  $('#searchInput').keyup(function() {
+    let value = $(this).val().toLowerCase();
+    $('#myTable tbody tr.affiche').filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+  });
+
+  // Sort functionality
+  let sortOrder = 'asc';
+  $('#sortName').click(function() {
+    let rows = $('#myTable tbody tr.affiche').get();
+    rows.sort(function(a, b) {
+      let keyA = $(a).find('td:first-child h6').text().toUpperCase();
+      let keyB = $(b).find('td:first-child h6').text().toUpperCase();
+
+      if (keyA < keyB) return sortOrder === 'asc' ? -1 : 1;
+      if (keyA > keyB) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    $.each(rows, function(index, row) {
+      $('#myTable tbody').append(row);
+    });
+
+    // Toggle the sort order for the next click
+    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+  });
+});
+
+
+
+</script>
+
+
+</html>

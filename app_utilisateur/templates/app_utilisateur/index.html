@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app_utilisateur/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'app_utilisateur/css/styles.css'%}">
+    <link rel="stylesheet" href="{% static 'app_utilisateur/css/all.min.css'%}">
+    <script src="{% static 'app_utilisateur/js/all.min.js'%}"></script>
+    <script src="{% static 'app_utilisateur/js/jquery.min.js'%}"></script>
+    <script src="{% static 'app_utilisateur/js/bootstrap.js'%}"></script>
+    <title>Application de livraison</title>
+</head>
+<body">
+    <div class="container my-5">
+        <p class="text-bold"></span>Bienvenue: {{ username}}</p>
+        <p class="text-secondary text-white">Email: {{ email }}</p>
+        <div class="row text-dark">
+
+            <div class="col-md-4">
+                {% for livraison in livraisons %}
+                <div class="card my-3">
+                    <div class="card-header p-3 pt-2 bg-transparent">
+                        <div style="font-weight: bold;">
+                            <span class="fas fa-truck-fast text-dark"></span>
+                            les Livraisons
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-dark mb-0 text-capitalize mb-2">
+                            <span class="text-bold" style="font-weight: bold;">Numéro:</span>
+                            {{ livraison.id}}
+                        </p>
+                        <p class="text-dark mb-0 text-capitalize mb-2">
+                            <span class="text-bold" style="font-weight: bold;">proprietaire: </span>
+                            {{ livraison.colis.destinataire.username }}
+                        </p>
+                        <p class="text-dark mb-0 text-capitalize mb-2"><span class="text-bold"
+                                style="font-weight: bold;">Expediteur: </span>{{ livraison.colis.expediteur }}</p>
+                        <p class="text-dark mb-0 text-capitalize mb-2"><span class="text-bold"
+                                style="font-weight: bold;">mis à jour: </span> {{livraison.colis.date_creation }}
+                        </p>
+
+
+                    </div>
+                    <div class="card-footer p-3">
+                        <p><span class="text-bold text-warning" style="font-weight: bold;">Statut: </span>
+                            {% if livraison.statut == "in_transit" %}
+                            En Transit
+                            {% elif livraison.statut == "delivered" %}
+                            Livré
+                            {% else %}
+                            Retardé
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="col-md-4">
+                {% for coli in colis %}
+
+                <div class="card my-3">
+                    <div class="card-header p-3 pt-2 bg-transparent">
+                        <div style="font-weight: bold;">
+                            <span class="fas fa-cube text-dark"></span>
+                            les colis
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center text-success" style="font-weight: bold; font-style: normal;">Colis:</p>
+                        <p class="text-dark mb-0 text-capitalize mb-2"><span class="text-bold"
+                                style="font-weight: bold; font-style: normal;">Numéro de suivi:</span> {{coli.numero_suivi}}</p>
+                        <p class="text-dark mb-0 text-capitalize mb-2"><span class="text-bold"
+                                style="font-weight: bold;">Expéditeur: </span> {{ coli.expediteur }}
+                        </p>
+                        <p class="text-dark mb-0 text-capitalize mb-2"><span class="text-bold"
+                                style="font-weight: bold;">adresse: </span>{{ coli.adresse }}</p>
+
+
+
+                    </div>
+                    <div class="card-footer p-3">
+                        <p class="text-dark mb-0 text-capitalize mb-2"><span class="text-bold"
+                                style="font-weight: bold;">Date: </span> {{ coli.date_creation }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-md-4">
+                <div class="card my-3">
+                    <div class="card-header p-3 pt-2 bg-transparent">
+                        <div style="font-weight: bold;">
+                            <span class="fas fa-truck-ramp-box">
+
+                            </span>
+                            Application de suivi de livraison
+                        </div>                 
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="fas fa-paper-plane text-danger" style="font-size: 128px;"></span>
+                    </div>
+                    <div class="card-footer p-3 text-center text-sm ">
+                        <p><span class=" fas fa-copyright"></span>Made by Ismael Djibo Garba</p>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>
